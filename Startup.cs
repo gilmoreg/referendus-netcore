@@ -23,8 +23,7 @@ namespace referendus_netcore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
-			// 1. Add Authentication Services
+			// Add Authentication Services
 			services.AddAuthentication(options =>
 			{
 				options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -32,9 +31,11 @@ namespace referendus_netcore
 
 			}).AddJwtBearer(options =>
 			{
-				options.Authority = "https://gilmoreg.auth0.com/";
-				options.Audience = "referendus-netcore";
+				options.Authority = Configuration["Auth0:Authority"];
+				options.Audience = Configuration["Auth0:Audience"];
 			});
+
+			services.AddMvc();
 		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
