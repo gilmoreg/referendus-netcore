@@ -2,7 +2,6 @@ namespace referendus_netcore
 {
 	using Microsoft.AspNetCore;
 	using Microsoft.AspNetCore.Hosting;
-	using System.Net;
 
 	public class Program
 	{
