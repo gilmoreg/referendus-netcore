@@ -4,11 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
+// Components
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
+import { CallbackComponent } from './components/callback/callback.component';
 
 @NgModule({
     declarations: [
@@ -16,7 +18,8 @@ import { CounterComponent } from './components/counter/counter.component';
         NavMenuComponent,
         CounterComponent,
         FetchDataComponent,
-        HomeComponent
+		HomeComponent,
+		CallbackComponent
     ],
     imports: [
         CommonModule,
@@ -26,7 +29,8 @@ import { CounterComponent } from './components/counter/counter.component';
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
-            { path: 'fetch-data', component: FetchDataComponent },
+			{ path: 'fetch-data', component: FetchDataComponent },
+			{ path: 'callback', component: CallbackComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]
