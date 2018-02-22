@@ -61,6 +61,7 @@
   },
   "dependencies": {
     "@types/auth0-js": "^8.11.2",
+    "angular2-jwt": "^0.2.3",
     "auth0-js": "^9.2.3"
   }
 }
