@@ -14,7 +14,7 @@ export class AuthService {
 	refreshSubscription: Subscription;
 
 	auth0 = new auth0.WebAuth({
-		clientID: 'vJbkOxpe8KH09MsN2yWihPx5M0Skm2eP',
+		clientID: 'u6VbURvNGDlv2bfWLetSUmiRzhF1b5Bp',
 		domain: 'gilmoreg.auth0.com',
 		responseType: 'token id_token',
 		audience: 'https://gilmoreg.auth0.com/userinfo',
