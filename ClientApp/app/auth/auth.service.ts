@@ -4,9 +4,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/filter';
 import * as auth0 from 'auth0-js';
+import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/timer';
 
 @Injectable()
 export class AuthService {
+	refreshSubscription: Subscription;
 
 	auth0 = new auth0.WebAuth({
 		clientID: 'vJbkOxpe8KH09MsN2yWihPx5M0Skm2eP',
@@ -77,7 +82,7 @@ export class AuthService {
 		if (!this.isAuthenticated()) return;
 		this.unscheduleRenewal();
 
-		const expiresAt = JSON.parse(window.localStorage.getItem('expires_at'));
+		const expiresAt = JSON.parse(window.localStorage.getItem('expires_at') || '');
 
 		const source = Observable.of(expiresAt).flatMap(
 			expiresAt => {
