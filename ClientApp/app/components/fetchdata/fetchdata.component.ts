@@ -1,23 +1,27 @@
 import { Component, Inject } from '@angular/core';
-import { Http } from '@angular/http';
+import { AuthHttp } from 'angular2-jwt';
+import 'rxjs/add/operator/map';
 
 @Component({
-    selector: 'fetchdata',
-    templateUrl: './fetchdata.component.html'
+	selector: 'fetchdata',
+	templateUrl: './fetchdata.component.html'
 })
 export class FetchDataComponent {
-    public forecasts: WeatherForecast[];
+	public forecasts: WeatherForecast[];
 
-    constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {
-        http.get(baseUrl + 'api/SampleData/WeatherForecasts').subscribe(result => {
-            this.forecasts = result.json() as WeatherForecast[];
-        }, error => console.error(error));
-    }
+	constructor(public authHttp: AuthHttp, @Inject('BASE_URL') baseUrl: string) {
+		this.authHttp.get(`${baseUrl}api/SampleData/WeatherForecasts`)
+			.map(res => res.json())
+			.subscribe(
+				data => this.forecasts = data as WeatherForecast[],
+				error => console.error(error)
+			);
+	}
 }
 
 interface WeatherForecast {
-    dateFormatted: string;
-    temperatureC: number;
-    temperatureF: number;
-    summary: string;
+	dateFormatted: string;
+	temperatureC: number;
+	temperatureF: number;
+	summary: string;
 }

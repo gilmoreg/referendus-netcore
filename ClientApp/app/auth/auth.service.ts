@@ -17,9 +17,9 @@ export class AuthService {
 		clientID: 'u6VbURvNGDlv2bfWLetSUmiRzhF1b5Bp',
 		domain: 'gilmoreg.auth0.com',
 		responseType: 'token id_token',
-		audience: 'https://gilmoreg.auth0.com/userinfo',
+		audience: 'referendus-netcore',
 		redirectUri: 'http://localhost:3000/callback',
-		scope: 'openid'
+		scope: 'openid profile rw:references'
 	});
 
 	constructor(public router: Router) { }
@@ -45,7 +45,7 @@ export class AuthService {
 		// Set the time that the Access Token will expire at
 		const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
 		localStorage.setItem('access_token', authResult.accessToken);
-		localStorage.setItem('id_token', authResult.idToken);
+		localStorage.setItem('token', authResult.idToken);
 		localStorage.setItem('expires_at', expiresAt);
 		this.scheduleRenewal();
 	}
@@ -53,7 +53,7 @@ export class AuthService {
 	public logout(): void {
 		// Remove tokens and expiry time from localStorage
 		localStorage.removeItem('access_token');
-		localStorage.removeItem('id_token');
+		localStorage.removeItem('token');
 		localStorage.removeItem('expires_at');
 		this.unscheduleRenewal();
 		// Go back to the home route
