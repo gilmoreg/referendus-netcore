@@ -1,11 +1,10 @@
 ﻿// src/app/auth/auth.service.ts
-
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import 'rxjs/add/operator/filter';
 import * as auth0 from 'auth0-js';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/filter';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/timer';
 
