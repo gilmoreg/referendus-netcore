@@ -31,4 +31,4 @@ RUN dotnet publish referendus-netcore.csproj -c Release -o /app
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "referendus-netcore.dll"]
+CMD ["dotnet", "referendus-netcore.dll"]
