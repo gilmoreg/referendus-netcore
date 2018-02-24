@@ -31,4 +31,4 @@ RUN dotnet publish referendus-netcore.csproj -c Release -o /app
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-CMD ["dotnet", "referendus-netcore.dll"]
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet referendus-netcore.dll
