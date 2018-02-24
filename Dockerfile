@@ -23,10 +23,10 @@ COPY referendus-netcore.csproj .
 RUN dotnet restore
 COPY . .
 WORKDIR /src/
-RUN dotnet build -c Release -o /app
+RUN dotnet build referendus-netcore.csproj -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish -c Release -o /app
+RUN dotnet publish referendus-netcore.csproj -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
