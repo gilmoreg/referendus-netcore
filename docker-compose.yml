@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  referendus-netcore:
+    image: referendus-netcore
+    build:
+      context: .
+      dockerfile: Dockerfile
