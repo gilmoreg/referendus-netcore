@@ -13,11 +13,11 @@ export class AuthService {
 	refreshSubscription: Subscription;
 
 	auth0 = new auth0.WebAuth({
-		clientID: 'u6VbURvNGDlv2bfWLetSUmiRzhF1b5Bp',
+		clientID: 'kJtPHPkdGEsTKBVtnZgepWK9tVPAbAWx',
 		domain: 'gilmoreg.auth0.com',
 		responseType: 'token id_token',
 		audience: 'referendus-netcore',
-		redirectUri: 'http://localhost:3000/callback',
+		redirectUri: `${window.location.protocol}//${window.location.host}/callback`,
 		scope: 'openid profile rw:references'
 	});
 
