@@ -20,7 +20,7 @@
 		[Required]
 		public int Id { get; set; }
 		[Required]
-		public string User { get; set; } // TODO foreign key
+		public User User { get; set; }
 		[Required]
 		public string Type { get; set; }
 		[Required]

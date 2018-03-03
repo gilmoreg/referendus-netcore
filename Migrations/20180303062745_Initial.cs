@@ -10,6 +10,21 @@ namespace referendusnetcore.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    Email = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    OAuthId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "References",
                 columns: table => new
                 {
@@ -30,7 +45,7 @@ namespace referendusnetcore.Migrations
                     Title = table.Column<string>(nullable: false),
                     Type = table.Column<string>(nullable: false),
                     Url = table.Column<string>(nullable: true),
-                    User = table.Column<string>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
                     AccessDate = table.Column<DateTime>(nullable: true),
                     PublishDate = table.Column<DateTime>(nullable: true),
                     SiteTitle = table.Column<string>(nullable: true)
@@ -38,21 +53,12 @@ namespace referendusnetcore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_References", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    Email = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    OAuthId = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_References_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -81,6 +87,11 @@ namespace referendusnetcore.Migrations
                 name: "IX_Author_ReferenceId",
                 table: "Author",
                 column: "ReferenceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_References_UserId",
+                table: "References",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -89,10 +100,10 @@ namespace referendusnetcore.Migrations
                 name: "Author");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "References");
 
             migrationBuilder.DropTable(
-                name: "References");
+                name: "Users");
         }
     }
 }

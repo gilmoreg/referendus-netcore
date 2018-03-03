@@ -65,10 +65,11 @@ namespace referendusnetcore.Migrations
 
                     b.Property<string>("Url");
 
-                    b.Property<string>("User")
-                        .IsRequired();
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("References");
 
@@ -146,6 +147,14 @@ namespace referendusnetcore.Migrations
                     b.HasOne("referendus_netcore.Reference")
                         .WithMany("Authors")
                         .HasForeignKey("ReferenceId");
+                });
+
+            modelBuilder.Entity("referendus_netcore.Reference", b =>
+                {
+                    b.HasOne("referendus_netcore.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
