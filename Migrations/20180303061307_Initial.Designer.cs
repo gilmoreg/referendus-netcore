@@ -13,8 +13,8 @@ using System.Collections.Generic;
 namespace referendusnetcore.Migrations
 {
     [DbContext(typeof(PsqlContext))]
-    [Migration("20180303061025_Inheritance")]
-    partial class Inheritance
+    [Migration("20180303061307_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

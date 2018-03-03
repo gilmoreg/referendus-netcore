@@ -5,23 +5,10 @@ using System.Collections.Generic;
 
 namespace referendusnetcore.Migrations
 {
-    public partial class Inheritance : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<int>(
-                name: "Id",
-                table: "Users",
-                nullable: false,
-                oldClrType: typeof(string))
-                .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
-
-            migrationBuilder.AddColumn<string>(
-                name: "OAuthId",
-                table: "Users",
-                nullable: false,
-                defaultValue: "");
-
             migrationBuilder.CreateTable(
                 name: "References",
                 columns: table => new
@@ -51,6 +38,21 @@ namespace referendusnetcore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_References", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    Email = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    OAuthId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -87,18 +89,10 @@ namespace referendusnetcore.Migrations
                 name: "Author");
 
             migrationBuilder.DropTable(
+                name: "Users");
+
+            migrationBuilder.DropTable(
                 name: "References");
-
-            migrationBuilder.DropColumn(
-                name: "OAuthId",
-                table: "Users");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Id",
-                table: "Users",
-                nullable: false,
-                oldClrType: typeof(int))
-                .OldAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
         }
     }
 }
