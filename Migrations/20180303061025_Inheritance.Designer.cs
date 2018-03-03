@@ -13,9 +13,10 @@ using System.Collections.Generic;
 namespace referendusnetcore.Migrations
 {
     [DbContext(typeof(PsqlContext))]
-    partial class PsqlContextModelSnapshot : ModelSnapshot
+    [Migration("20180303061025_Inheritance")]
+    partial class Inheritance
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
