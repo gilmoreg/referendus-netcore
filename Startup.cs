@@ -4,6 +4,7 @@ namespace referendus_netcore
 	using Microsoft.AspNetCore.Builder;
 	using Microsoft.AspNetCore.Hosting;
 	using Microsoft.AspNetCore.SpaServices.Webpack;
+	using Microsoft.EntityFrameworkCore;
 	using Microsoft.Extensions.Configuration;
 	using Microsoft.Extensions.DependencyInjection;
 
@@ -32,6 +33,7 @@ namespace referendus_netcore
 			});
 
 			services.AddMvc();
+			services.AddEntityFrameworkNpgsql().AddDbContext<PsqlContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("psqlconnection")));
 		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

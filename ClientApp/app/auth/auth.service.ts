@@ -18,7 +18,7 @@ export class AuthService {
 		responseType: 'token id_token',
 		audience: 'referendus-netcore',
 		redirectUri: `${window.location.protocol}//${window.location.host}/callback`,
-		scope: 'openid profile rw:references'
+		scope: 'openid profile email rw:references'
 	});
 
 	constructor(public router: Router) { }
