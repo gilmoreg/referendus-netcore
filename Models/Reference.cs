@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace referendus_netcore
+﻿namespace referendus_netcore
 {
+	using System;
+	using System.Collections.Generic;
+	using System.ComponentModel.DataAnnotations;
+
 	public class Author
 	{
 		[Required]
