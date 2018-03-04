@@ -2,7 +2,7 @@
 {
 	using Microsoft.EntityFrameworkCore;
 
-	internal class PsqlContext : DbContext
+	public class PsqlContext : DbContext
 	{
 		public PsqlContext(DbContextOptions<PsqlContext> options) : base(options) { }
 
