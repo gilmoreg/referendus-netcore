@@ -16,6 +16,12 @@ export class FetchDataComponent {
 				data => this.forecasts = data as WeatherForecast[],
 				error => console.error(error)
 			);
+		this.authHttp.get(`${baseUrl}api/SampleData/UserProfile`)
+			.map(res => res.json())
+			.subscribe(
+				data => console.log(data),
+				error => console.error(error)
+			);
 	}
 }
 

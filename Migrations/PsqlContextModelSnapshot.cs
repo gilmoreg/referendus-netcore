@@ -65,32 +65,14 @@ namespace referendusnetcore.Migrations
 
                     b.Property<string>("Url");
 
-                    b.Property<int>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("References");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Reference");
-                });
-
-            modelBuilder.Entity("referendus_netcore.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("OAuthId")
+                    b.Property<string>("UserId")
                         .IsRequired();
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("References");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Reference");
                 });
 
             modelBuilder.Entity("referendus_netcore.Article", b =>
@@ -147,14 +129,6 @@ namespace referendusnetcore.Migrations
                     b.HasOne("referendus_netcore.Reference")
                         .WithMany("Authors")
                         .HasForeignKey("ReferenceId");
-                });
-
-            modelBuilder.Entity("referendus_netcore.Reference", b =>
-                {
-                    b.HasOne("referendus_netcore.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

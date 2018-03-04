@@ -10,12 +10,10 @@ namespace referendus_netcore.Controllers
 	[Route("api/[controller]")]
     public class SampleDataController : Controller
     {
-		private IUserData _userData;
 		private IReferenceData _referenceData;
 
-		public SampleDataController(IUserData userData, IReferenceData referenceData)
+		public SampleDataController(IReferenceData referenceData)
 		{
-			_userData = userData;
 			_referenceData = referenceData;
 		}
 
@@ -24,10 +22,10 @@ namespace referendus_netcore.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        [HttpGet("[action]"), Authorize]
+        [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
         {
-			var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+			// var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 
 			var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast

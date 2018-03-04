@@ -43,7 +43,6 @@ namespace referendus_netcore
 
 			// Add repositories
 			// "Scoped" is one instance per request
-			services.AddScoped<IUserData, SqlUserData>();
 			services.AddScoped<IReferenceData, SqlReferenceData>();
 
 			// Add MVC
