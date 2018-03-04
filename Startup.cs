@@ -42,6 +42,7 @@ namespace referendus_netcore
 			services.AddEntityFrameworkNpgsql().AddDbContext<PsqlContext>(opt => opt.UseNpgsql(connectionString));
 
 			// Add repositories
+			// "Scoped" is one instance per request
 			services.AddScoped<IUserData, SqlUserData>();
 			services.AddScoped<IReferenceData, SqlReferenceData>();
 
