@@ -1,7 +1,6 @@
 ﻿namespace referendus_netcore
 {
 	using Microsoft.EntityFrameworkCore;
-	using System;
 	using System.Collections.Generic;
 	using System.Linq;
 
