@@ -5,7 +5,7 @@
 	interface IReferenceData
     {
 		IEnumerable<Reference> GetAll();
-		Reference Get(string id);
+		Reference Get(int id);
 		Reference Add(Reference reference);
 		Reference Update(Reference reference);
 	}
