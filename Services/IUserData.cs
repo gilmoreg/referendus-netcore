@@ -2,7 +2,7 @@
 {
 	using System.Collections.Generic;
 
-	interface IUserData
+	public interface IUserData
     {
 		IEnumerable<User> GetAll();
 		User Get(string id);

@@ -10,14 +10,16 @@ namespace referendus_netcore
 
 	public class Startup
     {
-        public Startup(IConfiguration configuration)
+		public IConfiguration Configuration { get; }
+		public IHostingEnvironment Environment { get; }
+
+		public Startup(IConfiguration configuration, IHostingEnvironment environment)
         {
             Configuration = configuration;
+			Environment = environment;
         }
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
+                // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 			// Add Authentication Services
@@ -32,14 +34,25 @@ namespace referendus_netcore
 				options.Audience = Configuration["Auth0:Audience"];
 			});
 
+			var connectionString = Environment.IsDevelopment() ?
+				Configuration.GetConnectionString("psqlconnection") :
+				Configuration["DATABASE_URL"];
+
+			// Add Postgres connection
+			services.AddEntityFrameworkNpgsql().AddDbContext<PsqlContext>(opt => opt.UseNpgsql(connectionString));
+
+			// Add repositories
+			services.AddScoped<IUserData, SqlUserData>();
+			services.AddScoped<IReferenceData, SqlReferenceData>();
+
+			// Add MVC
 			services.AddMvc();
-			services.AddEntityFrameworkNpgsql().AddDbContext<PsqlContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("psqlconnection")));
 		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
+            if (Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions

@@ -10,6 +10,15 @@ namespace referendus_netcore.Controllers
 	[Route("api/[controller]")]
     public class SampleDataController : Controller
     {
+		private IUserData _userData;
+		private IReferenceData _referenceData;
+
+		public SampleDataController(IUserData userData, IReferenceData referenceData)
+		{
+			_userData = userData;
+			_referenceData = referenceData;
+		}
+
         private static string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"

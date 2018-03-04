@@ -2,7 +2,7 @@
 {
 	using System.Collections.Generic;
 	
-	interface IReferenceData
+	public interface IReferenceData
     {
 		IEnumerable<Reference> GetAll();
 		Reference Get(int id);
