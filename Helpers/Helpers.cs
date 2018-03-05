@@ -1,0 +1,3 @@
+﻿namespace referendus_netcore
+{
+}

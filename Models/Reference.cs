@@ -47,6 +47,7 @@
 		public string City { get; set; }
 		public string Publisher { get; set; }
 		public string Edition { get; set; }
+		public int Year { get; set; }
 	}
 
 	public class Website: Reference
