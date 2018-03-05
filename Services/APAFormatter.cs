@@ -24,7 +24,7 @@
 			{
 				return "n.d.";
 			}
-			return date.ToString("YYYY, MMMM D", CultureInfo.InvariantCulture);
+			return date.ToString("yyyy, MMMM D", CultureInfo.InvariantCulture);
 		}
 
 		private string AuthorList(List<Author> authors)
