@@ -20,10 +20,26 @@
 			var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 			if (string.IsNullOrEmpty(userId))
 			{
-				return new StatusCodeResult(401);
+				return BadRequest("Invalid authorization - no name identifier claim present");
 			}
 
-			return Ok(_referenceData.GetAll(userId));
+			IFormatter formatter;
+			switch(format)
+			{
+				case "apa":
+					formatter = new APAFormatter();
+					break;
+				case "chicago":
+					formatter = new ChicagoFormatter();
+					break;
+				case "mla":
+					formatter = new MLAFormatter();
+					break;
+				default:
+					return BadRequest("Invalid format - must be apa, chicago, or mla");
+			}
+
+			return Ok(_referenceData.GetAll(userId).Select(r => formatter.Format(r)));
         }
     }
 }
