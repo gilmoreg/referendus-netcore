@@ -25,8 +25,6 @@ namespace referendus_netcore.Controllers
         [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
         {
-			// var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-
 			var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

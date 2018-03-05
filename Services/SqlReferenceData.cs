@@ -26,9 +26,9 @@
 			return _context.References.FirstOrDefault(r => r.Id == id);
 		}
 
-		public IEnumerable<Reference> GetAll()
+		public IEnumerable<Reference> GetAll(string userId)
 		{
-			return _context.References;
+			return _context.References.Where(r => r.UserId == userId);
 		}
 
 		public Reference Update(Reference reference)
