@@ -64,14 +64,14 @@
 			return str.ToString();
 		}
 
-		private string FormatArticle(Article article)
+		private string FormatArticle(Article a)
 		{
-			var str = new StringBuilder($"{AuthorList(article.Authors)}");
-			str.Append($"({article.Year}). {article.Title}. <i>{article.Journal}</i>, ");
-			str.Append($"<i>{article.Volume}</i>");
-			if (article.Pages != null)
+			var str = new StringBuilder($"{AuthorList(a.Authors)}");
+			str.Append($"({a.Year}). {a.Title}. <i>{a.Journal}</i>, ");
+			str.Append($"<i>{a.Volume}</i>");
+			if (a.Pages != null)
 			{
-				str.Append($", {article.Pages}.");
+				str.Append($", {a.Pages}.");
 			}
 			else
 			{
@@ -80,27 +80,27 @@
 			return str.ToString();
 		}
 
-		private string FormatBook(Book book)
+		private string FormatBook(Book b)
 		{
-			return $"{AuthorList(book.Authors)} ({book.Year}). <i>{book.Title}</i>. {book.City}: {book.Publisher}.";
+			return $"{AuthorList(b.Authors)} ({b.Year}). <i>{b.Title}</i>. {b.City}: {b.Publisher}.";
 		}
 
-		private string FormatWebsite(Website website)
+		private string FormatWebsite(Website w)
 		{
 			var str = new StringBuilder();
-			var authors = AuthorList(website.Authors);
-			string pubDate = Date(website.PublishDate);
-			string accessDate = Date(website.AccessDate);
+			var authors = AuthorList(w.Authors);
+			string pubDate = Date(w.PublishDate);
+			string accessDate = Date(w.AccessDate);
 			// If no author, title moves to the front
 			if (string.IsNullOrEmpty(authors))
 			{
-				str.Append($"{website.Title}. {pubDate}.");
+				str.Append($"{w.Title}. {pubDate}.");
 			}
 			else
 			{
-				str.Append($"{authors} ({pubDate}). {website.Title},");
+				str.Append($"{authors} ({pubDate}). {w.Title},");
 			}
-			str.Append($" <i>{website.SiteTitle}</i>. Retrieved {accessDate} from {website.Url}.");
+			str.Append($" <i>{w.SiteTitle}</i>. Retrieved {accessDate} from {w.Url}.");
 			return str.ToString();
 		}
 

@@ -48,6 +48,7 @@
 		public string Publisher { get; set; }
 		public string Edition { get; set; }
 		public int Year { get; set; }
+		public string Pages { get; set; }
 	}
 
 	public class Website: Reference
