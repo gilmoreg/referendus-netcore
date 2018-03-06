@@ -30,25 +30,24 @@
 		public string Identifier { get; set; }
 		public string Notes { get; set; }
 		public List<Author> Authors { get; set; }
+
 		public string Url { get; set; }
+		public int Year { get; set; }
+		public string Pages { get; set; }
 	}
 
 	public class Article : Reference
 	{
 		public string Journal { get; set; }
-		public int Year { get; set; }
 		public string Volume { get; set; }
 		public string Issue { get; set; }
-		public string Pages { get; set; }
 	}
 	
 	public class Book : Reference
 	{
 		public string City { get; set; }
 		public string Publisher { get; set; }
-		public string Edition { get; set; }
-		public int Year { get; set; }
-		public string Pages { get; set; }
+		public string Edition { get; set; }	
 	}
 
 	public class Website: Reference
