@@ -9,6 +9,10 @@
     {
 		private IReferenceData _referenceData;
 
+		public const string APA = "apa";
+		public const string Chicago = "chicago";
+		public const string MLA = "mla";
+
 		public ReferenceController(IReferenceData referenceData)
 		{
 			_referenceData = referenceData;
@@ -26,13 +30,13 @@
 			IFormatter formatter;
 			switch(format)
 			{
-				case "apa":
+				case APA:
 					formatter = new APAFormatter();
 					break;
-				case "chicago":
+				case Chicago:
 					formatter = new ChicagoFormatter();
 					break;
-				case "mla":
+				case MLA:
 					formatter = new MLAFormatter();
 					break;
 				default:
