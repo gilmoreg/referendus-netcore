@@ -45,5 +45,29 @@
 
 			return Ok(_referenceData.GetAll(userId).Select(r => formatter.Format(r)));
         }
+
+		[HttpPost("[action]"), Authorize]
+		public IActionResult Create([FromBody] Reference reference)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest("Model state is invalid");
+			}
+
+			var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+			if (string.IsNullOrEmpty(userId))
+			{
+				return BadRequest("Invalid authorization - no name identifier claim present");
+			}
+
+			if (reference.Type == null)
+			{
+				return BadRequest("Reference missing 'type'");
+			}
+
+
+
+			return Ok(reference);
+		}
     }
 }
