@@ -1,13 +1,14 @@
 ﻿namespace referendus_netcore
 {
+	using Microsoft.AspNetCore.Mvc.ModelBinding;
 	using System;
 	using System.Collections.Generic;
 	using System.ComponentModel.DataAnnotations;
 
 	public class Author
 	{
-		[Required]
 		public int Id { get; set; }
+
 		[Required]
 		public string FirstName { get; set; }
 		[Required]
@@ -18,10 +19,9 @@
 
 	public class Reference
     {
-		[Required]
 		public int Id { get; set; }
-		[Required]
 		public string UserId { get; set; }
+
 		[Required]
 		public string Type { get; set; }
 		[Required]
@@ -36,7 +36,7 @@
 
 	public class Article : Reference
 	{
-		[Required]
+		[BindRequired]
 		public int Year { get; set; }
 		[Required]
 		public string Journal { get; set; }
@@ -66,9 +66,9 @@
 		public string SiteTitle { get; set; }
 		[Required]
 		public string Url { get; set; }
-		[Required]
+		[BindRequired]
 		public DateTime AccessDate { get; set; }
-		[Required]
+		[BindRequired]
 		public DateTime PublishDate { get; set; }
 	}
 }
