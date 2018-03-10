@@ -21,9 +21,21 @@
 			return reference;
 		}
 
-		public Reference Get(int id)
+		public bool Delete(int id, string userId)
 		{
-			return _context.References.FirstOrDefault(r => r.Id == id);
+			var reference = _context.References.FirstOrDefault(r => r.Id == id && r.UserId == userId);
+			if (reference != null)
+			{
+				_context.References.Remove(reference);
+				_context.SaveChanges();
+				return true;
+			}
+			return false;
+		}
+
+		public Reference Get(int id, string userId)
+		{
+			return _context.References.FirstOrDefault(r => r.Id == id && r.UserId == userId);
 		}
 
 		public IEnumerable<Reference> GetAll(string userId)

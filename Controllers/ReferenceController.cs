@@ -3,7 +3,6 @@
 	using Microsoft.AspNetCore.Authorization;
 	using Microsoft.AspNetCore.Mvc;
 	using System.Linq;
-	using System.Security.Claims;
 
 	public class ReferenceController : Controller
     {
@@ -17,7 +16,7 @@
 		[HttpGet("[action]"), Authorize]
         public IActionResult Index([FromQuery(Name = "format")] string format)
         {
-			var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+			var userId = Helpers.GetUserId(User);
 			if (string.IsNullOrEmpty(userId))
 			{
 				return BadRequest(ErrorMessages.NoNameIdentifier);
@@ -50,7 +49,7 @@
 				return BadRequest(ModelState);
 			}
 
-			var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+			var userId = Helpers.GetUserId(User);
 			if (string.IsNullOrEmpty(userId))
 			{
 				return BadRequest(ErrorMessages.NoNameIdentifier);
@@ -59,6 +58,32 @@
 			reference.UserId = userId;
 			var newReference = _referenceData.Add(reference);
 			return Ok(newReference);
+		}
+
+		[HttpDelete("[action]/{id}"), Authorize]
+		public IActionResult Delete(int id)
+		{
+			var userId = Helpers.GetUserId(User);
+			if (string.IsNullOrEmpty(userId))
+			{
+				return BadRequest(ErrorMessages.NoNameIdentifier);
+			}
+
+			var deleted = _referenceData.Delete(id, userId);
+			if (deleted) return NoContent();
+			return NotFound();
+		}
+
+		[HttpPatch("[action]/{id}"), Authorize]
+		public IActionResult Edit([FromBody] Reference reference, int id)
+		{
+			var userId = Helpers.GetUserId(User);
+			if (string.IsNullOrEmpty(userId))
+			{
+				return BadRequest(ErrorMessages.NoNameIdentifier);
+			}
+
+			return Ok();
 		}
     }
 }
