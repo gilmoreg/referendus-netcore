@@ -43,7 +43,7 @@
 					return BadRequest("Invalid format - must be apa, chicago, or mla");
 			}
 
-			return Ok(_referenceData.GetAll(userId).Select(r => formatter.Format(r)));
+			return Ok(_referenceData.GetAll(userId).Select(r => formatter.Format(r)).ToList());
         }
 
 		[HttpPost("[action]"), Authorize]
@@ -60,14 +60,9 @@
 				return BadRequest("Invalid authorization - no name identifier claim present");
 			}
 
-			if (reference.Type == null)
-			{
-				return BadRequest("Reference missing 'type'");
-			}
-
-
-
-			return Ok(reference);
+			reference.UserId = userId;
+			var newReference = _referenceData.Add(reference);
+			return Ok(newReference);
 		}
     }
 }

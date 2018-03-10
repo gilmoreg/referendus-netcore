@@ -9,9 +9,9 @@
 	{
 		public int Id { get; set; }
 
-		[Required]
+		[Required, MinLength(1), MaxLength(255)]
 		public string FirstName { get; set; }
-		[Required]
+		[Required, MinLength(1), MaxLength(255)]
 		public string LastName { get; set; }
 
 		public string MiddleName { get; set; }
@@ -22,11 +22,11 @@
 		public int Id { get; set; }
 		public string UserId { get; set; }
 
-		[Required]
+		[Required, MinLength(1)]
 		public string Type { get; set; }
-		[Required]
+		[Required, MinLength(1), MaxLength(255)]
 		public string Title { get; set; }
-		[Required]
+		[Required, MinLength(1), MaxLength(255)]
 		public List<Author> Authors { get; set; }
 
 		public List<string> Tags { get; set; }
@@ -36,23 +36,23 @@
 
 	public class Article : Reference
 	{
-		[BindRequired]
+		[BindRequired, Range(0, 3000)]
 		public int Year { get; set; }
-		[Required]
+		[Required, MinLength(1), MaxLength(255)]
 		public string Journal { get; set; }
-		[Required]
+		[Required, MinLength(1), MaxLength(255)]
 		public string Volume { get; set; }
-		[Required]
+		[Required, MinLength(1), MaxLength(255)]
 		public string Issue { get; set; }
-		[Required]
+		[Required, MinLength(1), MaxLength(255)]
 		public string Pages { get; set; }
 	}
 	
 	public class Book : Reference
 	{
-		[Required]
+		[Required, MinLength(1), MaxLength(255)]
 		public string City { get; set; }
-		[Required]
+		[Required, MinLength(1), MaxLength(255)]
 		public string Publisher { get; set; }
 
 		public string Edition { get; set; }
@@ -62,9 +62,9 @@
 
 	public class Website: Reference
 	{
-		[Required]
+		[Required, MinLength(1), MaxLength(255)]
 		public string SiteTitle { get; set; }
-		[Required]
+		[Required, MinLength(1), MaxLength(255), Url]
 		public string Url { get; set; }
 		[BindRequired]
 		public DateTime AccessDate { get; set; }
