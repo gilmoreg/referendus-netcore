@@ -9,10 +9,6 @@
     {
 		private IReferenceData _referenceData;
 
-		public const string APA = "apa";
-		public const string Chicago = "chicago";
-		public const string MLA = "mla";
-
 		public ReferenceController(IReferenceData referenceData)
 		{
 			_referenceData = referenceData;
@@ -24,23 +20,23 @@
 			var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 			if (string.IsNullOrEmpty(userId))
 			{
-				return BadRequest("Invalid authorization - no name identifier claim present");
+				return BadRequest(ErrorMessages.NoNameIdentifier);
 			}
 
 			IFormatter formatter;
 			switch(format)
 			{
-				case APA:
+				case Formats.APA:
 					formatter = new APAFormatter();
 					break;
-				case Chicago:
+				case Formats.Chicago:
 					formatter = new ChicagoFormatter();
 					break;
-				case MLA:
+				case Formats.MLA:
 					formatter = new MLAFormatter();
 					break;
 				default:
-					return BadRequest("Invalid format - must be apa, chicago, or mla");
+					return BadRequest(ErrorMessages.InvalidFormat);
 			}
 
 			return Ok(_referenceData.GetAll(userId).Select(r => formatter.Format(r)).ToList());
@@ -51,13 +47,13 @@
 		{
 			if (!ModelState.IsValid)
 			{
-				return BadRequest("Model state is invalid");
+				return BadRequest(ModelState);
 			}
 
 			var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 			if (string.IsNullOrEmpty(userId))
 			{
-				return BadRequest("Invalid authorization - no name identifier claim present");
+				return BadRequest(ErrorMessages.NoNameIdentifier);
 			}
 
 			reference.UserId = userId;
