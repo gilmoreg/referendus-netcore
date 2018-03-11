@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "referendus-netcore", "referendus-netcore.csproj", "{21515A95-033D-4CAF-929C-21C7B82279A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "referendus-netcore", "referendus-netcore\referendus-netcore.csproj", "{21515A95-033D-4CAF-929C-21C7B82279A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "..\TestProject\TestProject.csproj", "{188B5E2A-191D-4332-B3E7-25BD51CDDD30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", ".\TestProject\TestProject.csproj", "{188B5E2A-191D-4332-B3E7-25BD51CDDD30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
