@@ -19,6 +19,8 @@ EXPOSE 80
 
 FROM microsoft/aspnetcore-build:2.0 AS build
 WORKDIR /src
+RUN pwd
+RUN ls -l
 COPY referendus-netcore.csproj .
 RUN dotnet restore
 COPY . .
