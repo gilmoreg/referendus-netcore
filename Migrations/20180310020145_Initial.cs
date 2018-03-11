@@ -20,7 +20,9 @@ namespace referendusnetcore.Migrations
                     Year = table.Column<int>(nullable: true),
                     City = table.Column<string>(nullable: true),
                     Edition = table.Column<string>(nullable: true),
+                    Book_Pages = table.Column<string>(nullable: true),
                     Publisher = table.Column<string>(nullable: true),
+                    Book_Year = table.Column<int>(nullable: true),
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     Discriminator = table.Column<string>(nullable: false),
@@ -29,11 +31,11 @@ namespace referendusnetcore.Migrations
                     Tags = table.Column<List<string>>(nullable: true),
                     Title = table.Column<string>(nullable: false),
                     Type = table.Column<string>(nullable: false),
-                    Url = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
                     AccessDate = table.Column<DateTime>(nullable: true),
                     PublishDate = table.Column<DateTime>(nullable: true),
-                    SiteTitle = table.Column<string>(nullable: true)
+                    SiteTitle = table.Column<string>(nullable: true),
+                    Url = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -47,7 +49,7 @@ namespace referendusnetcore.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     FirstName = table.Column<string>(nullable: false),
-                    LastName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: false),
                     MiddleName = table.Column<string>(nullable: true),
                     ReferenceId = table.Column<int>(nullable: true)
                 },

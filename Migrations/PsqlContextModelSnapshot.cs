@@ -30,7 +30,8 @@ namespace referendusnetcore.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired();
 
-                    b.Property<string>("LastName");
+                    b.Property<string>("LastName")
+                        .IsRequired();
 
                     b.Property<string>("MiddleName");
 
@@ -63,10 +64,7 @@ namespace referendusnetcore.Migrations
                     b.Property<string>("Type")
                         .IsRequired();
 
-                    b.Property<string>("Url");
-
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                    b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
@@ -79,13 +77,17 @@ namespace referendusnetcore.Migrations
                 {
                     b.HasBaseType("referendus_netcore.Reference");
 
-                    b.Property<string>("Issue");
+                    b.Property<string>("Issue")
+                        .IsRequired();
 
-                    b.Property<string>("Journal");
+                    b.Property<string>("Journal")
+                        .IsRequired();
 
-                    b.Property<string>("Pages");
+                    b.Property<string>("Pages")
+                        .IsRequired();
 
-                    b.Property<string>("Volume");
+                    b.Property<string>("Volume")
+                        .IsRequired();
 
                     b.Property<int>("Year");
 
@@ -98,11 +100,19 @@ namespace referendusnetcore.Migrations
                 {
                     b.HasBaseType("referendus_netcore.Reference");
 
-                    b.Property<string>("City");
+                    b.Property<string>("City")
+                        .IsRequired();
 
                     b.Property<string>("Edition");
 
-                    b.Property<string>("Publisher");
+                    b.Property<string>("Pages")
+                        .HasColumnName("Book_Pages");
+
+                    b.Property<string>("Publisher")
+                        .IsRequired();
+
+                    b.Property<int>("Year")
+                        .HasColumnName("Book_Year");
 
                     b.ToTable("Book");
 
@@ -117,7 +127,11 @@ namespace referendusnetcore.Migrations
 
                     b.Property<DateTime>("PublishDate");
 
-                    b.Property<string>("SiteTitle");
+                    b.Property<string>("SiteTitle")
+                        .IsRequired();
+
+                    b.Property<string>("Url")
+                        .IsRequired();
 
                     b.ToTable("Website");
 
