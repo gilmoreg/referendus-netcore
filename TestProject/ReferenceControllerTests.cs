@@ -83,12 +83,13 @@ namespace TestProject
 		public void EditShouldUpdateAReference()
 		{
 			var controller = TestData.CreateReferenceController();
-			var update = new JObject
+			var update = new TestArticle
 			{
-				new JProperty("Title", "New Title"),
-				new JProperty("Year", 3000)
+				Id = 1,
+				Title = "New Title",
+				Year = 3000
 			};
-			var result = (OkObjectResult)controller.Edit(update, 1);
+			var result = (OkObjectResult)controller.Edit(update);
 			Assert.Equal(200, result.StatusCode);
 			var value = (Article)result.Value;
 			Assert.Equal("New Title", value.Title);
@@ -99,21 +100,12 @@ namespace TestProject
 		public void EditShouldReturnNotFoundForBadId()
 		{
 			var controller = TestData.CreateReferenceController();
-			var result = (NotFoundResult)controller.Edit(new JObject(), 10000);
-			Assert.Equal(404, result.StatusCode);
-		}
-
-		[Fact]
-		public void EditShouldReturnBadRequestOnNonExistentField()
-		{
-			var controller = TestData.CreateReferenceController();
-			var update = new JObject
+			var update = new TestArticle
 			{
-				new JProperty("Garbage", "garbage")
+				UserId = "10000"
 			};
-			var result = (BadRequestObjectResult)controller.Edit(update, 1);
-			Assert.Equal(400, result.StatusCode);
-			Assert.Equal("Property Garbage cannot be updated on reference type Article", result.Value.ToString());
+			var result = (NotFoundResult)controller.Edit(update);
+			Assert.Equal(404, result.StatusCode);
 		}
 	}
 }

@@ -81,7 +81,7 @@
 			var referenceToUpdate = _referenceData.Get(update.Id, userId);
 			if (referenceToUpdate == null) return NotFound();
 
-			var result = _referenceData.Update(referenceToUpdate);
+			var result = _referenceData.Update(update);
 			return Ok(result);
 		}
     }
