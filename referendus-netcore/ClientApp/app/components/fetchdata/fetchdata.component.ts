@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { AuthHttp } from 'angular2-jwt';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
 @Component({
@@ -9,11 +9,10 @@ import 'rxjs/add/operator/map';
 export class FetchDataComponent {
 	public forecasts: WeatherForecast[];
 
-	constructor(public authHttp: AuthHttp, @Inject('BASE_URL') baseUrl: string) {
-		this.authHttp.get(`${baseUrl}api/SampleData/WeatherForecasts`)
-			.map(res => res.json())
+	constructor(httpClient: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+		httpClient.get<WeatherForecast[]>(`${baseUrl}api/SampleData/WeatherForecasts`)
 			.subscribe(
-				data => this.forecasts = data as WeatherForecast[],
+				data => this.forecasts = data,
 				error => console.error(error)
 			);
 	}

@@ -1,4 +1,4 @@
-FROM microsoft/aspnetcore:2.0 AS base
+FROM microsoft/aspnetcore:2.1 AS base
 
 ENV NODE_VERSION 9.5.0
 ENV ASPNETCORE_ENVIRONMENT Production
@@ -17,7 +17,7 @@ RUN buildDeps='xz-utils' \
 WORKDIR /app
 EXPOSE 80
 
-FROM microsoft/aspnetcore-build:2.0 AS build
+FROM microsoft/aspnetcore-build:2.1 AS build
 WORKDIR /src
 COPY referendus-netcore.csproj .
 RUN dotnet restore
